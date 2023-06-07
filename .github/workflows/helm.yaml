@@ -3,7 +3,7 @@ on:
  pull_request:
   types: ["opened", "edited", "reopened", "synchronize"]
   branches:
-   - 'master'
+   - 'main'
   paths:
    - "charts/**"
 jobs:
