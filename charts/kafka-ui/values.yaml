@@ -79,17 +79,18 @@ probes:
   useHttpsScheme: false
 
 podSecurityContext:
-  {}
-  # fsGroup: 2000
+  fsGroup: 101
 
 securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  runAsGroup: 101
+  runAsNonRoot: true
+  runAsUser: 100
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   type: ClusterIP
