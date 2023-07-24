@@ -93,7 +93,7 @@ securityContext:
 
 ## Set Pod Priority Class - importance of Pod relatives to other pods
 ##
-priorityClassName: system-cluster-critical
+priorityClassName: default
 
 ## Set Pod Disruption Budget to limit the number of concurrent disruptions
 ## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
