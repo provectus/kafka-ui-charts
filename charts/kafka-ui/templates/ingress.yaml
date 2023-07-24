@@ -35,12 +35,17 @@ spec:
 {{- if and ($.Capabilities.APIVersions.Has "networking.k8s.io/v1") $isHigher1p19 -}}
           {{- range .Values.ingress.precedingPaths }}
           - path: {{ .path }}
-            pathType: {{ .Values.ingress.pathType }}
+            pathType: {{ $.Values.ingress.pathType }}
             backend:
               service:
                 name: {{ .serviceName }}
                 port:
+                  {{- if .servicePort }}
                   number: {{ .servicePort }}
+                  {{- end }}
+                  {{- if .servicePortName }}
+                  name: {{ .servicePortName }}
+                  {{- end }}
           {{- end }}
           - backend:
               service:
