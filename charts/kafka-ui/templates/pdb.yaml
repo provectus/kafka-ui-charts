@@ -1,5 +1,11 @@
 {{- if .Values.podDisruptionBudget.enabled -}}
+{{- $kubeCapabilityVersion := semver .Capabilities.KubeVersion.Version -}}
+{{- $isHigher1p21 := ge (semver "1.21" | $kubeCapabilityVersion.Compare) 0 -}}
+{{- if $isHigher1p21 -}}
 apiVersion: policy/v1
+{{- else }}
+apiVersion: policy/v1beta1
+{{- end }}
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "kafka-ui.fullname" . }}
