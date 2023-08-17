@@ -40,7 +40,12 @@ spec:
               service:
                 name: {{ .serviceName }}
                 port:
+                  {{- if .servicePort }}
                   number: {{ .servicePort }}
+                  {{- end }}
+                  {{- if .servicePortName }}
+                  name: {{ .servicePortName }}
+                  {{- end }}
           {{- end }}
           - backend:
               service:
