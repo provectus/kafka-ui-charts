@@ -9,6 +9,7 @@ apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "kafka-ui.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "kafka-ui.labels" . | nindent 4 }}
 spec:
