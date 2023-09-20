@@ -91,6 +91,17 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
+## Set Pod Priority Class - importance of Pod relatives to other pods
+##
+priorityClassName: default
+
+## Set Pod Disruption Budget to limit the number of concurrent disruptions
+## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+podDisruptionBudget:
+  enabled: false
+  minAvailable: ""
+  maxUnavailable: ""
+
 service:
   type: ClusterIP
   port: 80
@@ -161,3 +172,10 @@ initContainers: {}
 volumeMounts: {}
 
 volumes: {}
+
+## Set custom TopologySpreadConstraints to manage the distribution of Pods across cluster’s failure-domains
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+topologySpreadConstraints: []
+  # - maxSkew: 1
+  #   topologyKey: kubernetes.io/hostname
+  #   whenUnsatisfiable: DoNotSchedule
