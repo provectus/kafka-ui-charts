@@ -1,0 +1,22 @@
+{{- if .Values.istio.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "kafka-ui.fullname" . }}
+  labels:
+    {{- include "kafka-ui.labels" . | nindent 4 }}
+spec:
+  hosts:
+    {{- toYaml .Values.istio.virtualService.hosts | nindent 4 }}
+  gateways:
+    {{- toYaml .Values.istio.virtualService.gateways | nindent 4 }}
+  http:
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: {{ include "kafka-ui.fullname" . }}
+        port:
+          number: 80
+{{- end }}
