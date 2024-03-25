@@ -91,9 +91,11 @@ spec:
               {{- if .Values.probes.useHttpsScheme }}
               scheme: HTTPS
               {{- end }}
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 10
+            initialDelaySeconds: {{ .Values.probes.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.probes.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.probes.livenessProbe.failureThreshold }}            
           readinessProbe:
             httpGet:
               {{- $contextPath := .Values.envs.config.SERVER_SERVLET_CONTEXT_PATH | default "" | printf "%s/actuator/health" | urlParse }}
@@ -102,9 +104,11 @@ spec:
               {{- if .Values.probes.useHttpsScheme }}
               scheme: HTTPS
               {{- end }}
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 10
+            initialDelaySeconds: {{ .Values.probes.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.probes.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.probes.readinessProbe.failureThreshold }}            
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if or .Values.yamlApplicationConfig .Values.volumeMounts .Values.yamlApplicationConfigConfigMap}}
