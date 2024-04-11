@@ -103,7 +103,8 @@ service:
 ingress:
   # Enable ingress resource
   enabled: false
-
+  # Custom labels for the Ingress
+  labels: {}
   # Annotations for the Ingress
   annotations: {}
 
