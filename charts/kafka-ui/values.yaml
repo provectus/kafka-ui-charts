@@ -69,6 +69,9 @@ networkPolicy:
 podAnnotations: {}
 podLabels: {}
 
+## Labels to be added to kafka-ui Deployment
+##
+labels: {}
 ## Annotations to be added to kafka-ui Deployment
 ##
 annotations: {}
