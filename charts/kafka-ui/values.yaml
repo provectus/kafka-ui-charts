@@ -111,6 +111,7 @@ ingress:
   ingressClassName: ""
 
   # The path for the Ingress
+  # Ensure to set envs.config.SERVER_SERVLET_CONTEXT_PATH if you want it to work at a subpath other than /
   path: "/"
 
   # The path type for the Ingress
