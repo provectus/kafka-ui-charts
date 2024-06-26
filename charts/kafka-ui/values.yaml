@@ -99,6 +99,18 @@ service:
   # if you want to force a specific nodePort. Must be use with service.type=NodePort
   # nodePort:
 
+# Istio configuration
+istio:
+  # Enable istio resource
+  enabled: false
+  # Settings istio VirtualService
+  virtualService:
+    hosts:
+      - "example.com"
+    # Settings gateway istio 
+    gateways:
+      - "istio-system/gateway"
+
 # Ingress configuration
 ingress:
   # Enable ingress resource
