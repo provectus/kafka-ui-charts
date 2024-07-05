@@ -92,6 +92,12 @@ securityContext:
   # runAsUser: 1000
 
 service:
+  # Annotations for the Service
+  annotations: {}
+
+  # Labels for the Service
+  labels: {}
+
   type: ClusterIP
   port: 80
   # In case of service type LoadBalancer, you can specify reserved static IP
