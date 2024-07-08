@@ -14,6 +14,6 @@ spec:
     - Ingress
   ingress:
     {{- if .Values.networkPolicy.ingressRules.customRules }}
-    {{- toYaml .Values.networkPolicy.ingressRules.customRules | nindent 4 }}
+    {{- tpl (toYaml .Values.networkPolicy.ingressRules.customRules) $ | nindent 4 }}
     {{- end }}
 {{- end }}
