@@ -37,3 +37,14 @@ jobs:
       - uses: rickstaa/action-create-tag@v1 #create new tag
         with:
           tag: "charts/kafka-ui-${{ env.HELM_VERSION }}"
+
+      - name: Login to OCI registry
+        run: |
+          echo "${{ secrets.OCI_REGISTRY_PASSWORD }}" | helm registry login -u ${{ secrets.OCI_REGISTRY_USERNAME }} --password-stdin ${{ secrets.OCI_REGISTRY_URL }}
+
+      - name: Package and push Helm chart to OCI registry
+        run: |
+          VERSION=$(cat charts/kafka-ui/Chart.yaml | grep version | awk '{print $2}')
+          echo "HELM_VERSION=$(echo ${VERSION})" >> $GITHUB_ENV
+          helm package charts/kafka-ui
+          helm push charts/kafka-ui-${{ env.HELM_VERSION }}.tgz oci://${{ secrets.OCI_REGISTRY_URL }}/helm-charts
